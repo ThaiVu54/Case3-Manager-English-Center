@@ -1,5 +1,5 @@
 create database english_center;
-use english_center;
+use demo3;
 create table course
 (
     id   int primary key auto_increment,
@@ -131,5 +131,6 @@ create table diary(
 select s.name, s2.username, s2.password
 from student s join studentaccount s2 on s.id = s2.student_id where s.id = 1;
 
+drop table teacheraccount;
 
 
