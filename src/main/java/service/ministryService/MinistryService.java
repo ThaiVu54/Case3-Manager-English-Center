@@ -1,14 +1,14 @@
-package service;
+package service.ministryService;
 
 import config.ConnectSingleton;
 import model.Ministry;
+import service.ministryService.IMinistry;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 //import java.sql.Date;
 

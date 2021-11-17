@@ -1,4 +1,4 @@
-package service;
+package service.ministryService;
 
 import model.Ministry;
 

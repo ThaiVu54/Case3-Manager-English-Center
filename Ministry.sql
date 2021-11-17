@@ -4,3 +4,5 @@ select * from ministry;
 UPDATE ministry t SET t.name = ?, t.email = ?, t.dob = ?, t.address = ?, t.phone = ? WHERE t.id = ?;
 
 DELETE FROM ministry WHERE id = ?;
+
+select * from ministryaccount;
