@@ -1,25 +1,30 @@
 package model;
 
+import java.util.List;
+
 public class Grade {
     private int id;
     private String name;
     private Teacher teacher;
     private Course course;
+    private List<Student> studentList;
 
     public Grade() {
     }
 
-    public Grade(String name, Teacher teacher, Course course) {
-        this.name = name;
-        this.teacher = teacher;
-        this.course = course;
-    }
-
-    public Grade(int id, String name, Teacher teacher, Course course) {
+    public Grade(int id, String name, Teacher teacher, Course course, List<Student> studentList) {
         this.id = id;
         this.name = name;
         this.teacher = teacher;
         this.course = course;
+        this.studentList = studentList;
+    }
+
+    public Grade(String name, Teacher teacher, Course course, List<Student> studentList) {
+        this.name = name;
+        this.teacher = teacher;
+        this.course = course;
+        this.studentList = studentList;
     }
 
     public int getId() {
@@ -52,5 +57,13 @@ public class Grade {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 }

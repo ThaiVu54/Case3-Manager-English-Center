@@ -130,3 +130,6 @@ create table diary(
 -- test username password student
 select s.name, s2.username, s2.password
 from student s join studentaccount s2 on s.id = s2.student_id where s.id = 1;
+
+
+
