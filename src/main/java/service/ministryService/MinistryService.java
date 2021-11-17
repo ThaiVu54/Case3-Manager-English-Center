@@ -4,10 +4,7 @@ import config.ConnectSingleton;
 import model.Ministry;
 import service.ministryService.IMinistry;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 //import java.sql.Date;
@@ -79,5 +76,29 @@ public class MinistryService implements IMinistry {
         preparedStatement.setInt(1, id);
         rowDeleted = preparedStatement.executeUpdate() > 1;
         return rowDeleted;
+    }
+
+    @Override
+    public Ministry findById(int id) {
+        Ministry ministry = null;
+        String query = "{call find_id_ministry(?)}";
+        try (Connection connection = ConnectSingleton.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1, id);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+//                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String dob = resultSet.getString("dob");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                ministry = new Ministry(id, name, email, dob, address, phone);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ministry;
     }
 }

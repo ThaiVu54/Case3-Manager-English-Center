@@ -13,4 +13,6 @@ public interface IMinistry {
      boolean updateMinistry(Ministry ministry) throws SQLException;
 
      boolean deleteMinistry(int id) throws SQLException;
+
+     Ministry findById (int id);
 }

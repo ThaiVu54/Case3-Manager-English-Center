@@ -29,6 +29,7 @@ public class MinistryServlet extends HttpServlet {
                 showMinistryForm(request,response);
                 break;
             case "edit":
+                showEditForm(request,response);
                 break;
             case "insert":
                 break;
@@ -37,6 +38,10 @@ public class MinistryServlet extends HttpServlet {
             default:
                 break;
         }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
+        int idMinistry = Integer.parseInt(request.getParameter("id"));
     }
 
     private void showMinistryForm(HttpServletRequest request, HttpServletResponse response) {

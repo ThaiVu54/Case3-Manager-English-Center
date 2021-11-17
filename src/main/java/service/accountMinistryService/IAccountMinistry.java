@@ -14,4 +14,6 @@ public interface IAccountMinistry {
     public boolean updateAccMinistry(MinistryAccout ministryAccout) throws SQLException;
 
     boolean deleteAccMinistry(int id) throws SQLException;
+
+
 }

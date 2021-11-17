@@ -52,4 +52,5 @@ public class AccountMinistry implements IAccountMinistry {
     public boolean deleteAccMinistry(int id) throws SQLException {
         return false;
     }
+
 }

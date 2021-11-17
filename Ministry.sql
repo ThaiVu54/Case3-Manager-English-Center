@@ -30,3 +30,13 @@ END; $$
 delimiter ;
 
 CALL update_account_ministry('vu','thai',1);
+
+DELIMITER $$
+create procedure find_id_ministry (in ministry_id int)
+begin
+    select id, name, email,dob,address,phone from ministry where id = ministry_id;
+end; $$
+DELIMITER ;
+
+call find_id_ministry(2)
+
