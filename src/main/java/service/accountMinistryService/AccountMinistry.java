@@ -48,11 +48,6 @@ public class AccountMinistry implements IAccountMinistry {
         return rowUpdated;
     }
 
-    public static void main(String[] args) throws SQLException{
-        AccountMinistry accountMinistry = new AccountMinistry();
-        accountMinistry.updateAccMinistry(new MinistryAccout("thai","thai",1));
-
-    }
     @Override
     public boolean deleteAccMinistry(int id) throws SQLException {
         return false;

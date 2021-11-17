@@ -42,13 +42,6 @@ public class MinistryService implements IMinistry {
         return ministries;
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        MinistryService ministryService = new MinistryService();
-////        ministryService.showMinistry();
-////        ministryService.addMinistry(new Ministry("Adma","adm@gmail.com","1998-3-1","Paris","0987123456"));
-////        ministryService.updateMinistry(new Ministry(3, "adam", "adkjal", "1999-1-1", "vega", "1234567890"));
-//        ministryService.deleteMinistry(4);
-//    }
 
     @Override
     public void addMinistry(Ministry ministry) throws SQLException {
