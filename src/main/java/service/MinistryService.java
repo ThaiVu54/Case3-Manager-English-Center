@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MinistryService implements IMinistry {
     public static final String UPDATE_MINISTRY_T_SET_T_NAME_T_EMAIL_T_DOB_T_ADDRESS_T_PHONE_WHERE_T_ID = "UPDATE ministry t SET t.name = ?, t.email = ?, t.dob = ?, t.address = ?, t.phone = ? WHERE t.id = ?";
+    public static final String DELETE_FROM_MINISTRY_WHERE_ID = "DELETE FROM ministry WHERE id = ?";
     Ministry ministry = new Ministry();
 
     public static final String SELECT_FROM_MINISTRY = "select * from ministry";
@@ -41,12 +42,13 @@ public class MinistryService implements IMinistry {
         return ministries;
     }
 
-    public static void main(String[] args) throws SQLException {
-        MinistryService ministryService = new MinistryService();
-//        ministryService.showMinistry();
-//        ministryService.addMinistry(new Ministry("Adma","adm@gmail.com","1998-3-1","Paris","0987123456"));
-        ministryService.updateMinistry(new Ministry(3,"adam","adkjal","1999-1-1","vega","1234567890"));
-    }
+//    public static void main(String[] args) throws SQLException {
+//        MinistryService ministryService = new MinistryService();
+////        ministryService.showMinistry();
+////        ministryService.addMinistry(new Ministry("Adma","adm@gmail.com","1998-3-1","Paris","0987123456"));
+////        ministryService.updateMinistry(new Ministry(3, "adam", "adkjal", "1999-1-1", "vega", "1234567890"));
+//        ministryService.deleteMinistry(4);
+//    }
 
     @Override
     public void addMinistry(Ministry ministry) throws SQLException {
@@ -66,18 +68,23 @@ public class MinistryService implements IMinistry {
         boolean rowUpdated = false;
         Connection connection = ConnectSingleton.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_MINISTRY_T_SET_T_NAME_T_EMAIL_T_DOB_T_ADDRESS_T_PHONE_WHERE_T_ID);
-        preparedStatement.setString(1,ministry.getName());
-        preparedStatement.setString(2,ministry.getEmail());
-        preparedStatement.setString(3,ministry.getDob());
-        preparedStatement.setString(4,ministry.getAddress());
-        preparedStatement.setString(5,ministry.getPhone());
-        preparedStatement.setInt(6,ministry.getId());
-        rowUpdated=preparedStatement.executeUpdate()>0;
+        preparedStatement.setString(1, ministry.getName());
+        preparedStatement.setString(2, ministry.getEmail());
+        preparedStatement.setString(3, ministry.getDob());
+        preparedStatement.setString(4, ministry.getAddress());
+        preparedStatement.setString(5, ministry.getPhone());
+        preparedStatement.setInt(6, ministry.getId());
+        rowUpdated = preparedStatement.executeUpdate() > 0;
         return rowUpdated;
     }
 
     @Override
     public boolean deleteMinistry(int id) throws SQLException {
-        return false;
+        boolean rowDeleted = false;
+        Connection connection = ConnectSingleton.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_MINISTRY_WHERE_ID);
+        preparedStatement.setInt(1, id);
+        rowDeleted = preparedStatement.executeUpdate() > 1;
+        return rowDeleted;
     }
 }
