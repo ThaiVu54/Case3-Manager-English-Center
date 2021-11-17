@@ -8,16 +8,18 @@ public class Grade {
     private Teacher teacher;
     private Course course;
     private List<Student> studentList;
+    private String diary;
 
     public Grade() {
     }
 
-    public Grade(int id, String name, Teacher teacher, Course course, List<Student> studentList) {
+    public Grade(int id, String name, Teacher teacher, Course course, List<Student> studentList,String diary) {
         this.id = id;
         this.name = name;
         this.teacher = teacher;
         this.course = course;
         this.studentList = studentList;
+        this.diary = diary;
     }
 
     public Grade(String name, Teacher teacher, Course course, List<Student> studentList) {
@@ -65,5 +67,13 @@ public class Grade {
 
     public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
+    }
+
+    public String getDiary() {
+        return diary;
+    }
+
+    public void setDiary(String diary) {
+        this.diary = diary;
     }
 }
