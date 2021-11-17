@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectSingleton {
     private static Connection connection;
-    private static String URL = "jdbc:mysql://localhost:3306/english_center";
+    private static String URL = "jdbc:mysql://localhost:3306/englishcenter";
     private static String username = "root";
-    private static String password = "123456789";//anh em tự thay đổi password nhé
+    private static String password = "Weedfromcalifornia1107@@";//anh em tự thay đổi password nhé
 
     public static Connection getConnection() {
         if (connection == null) {
