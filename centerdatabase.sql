@@ -29,6 +29,7 @@ create table teacher
     address varchar(50),
     phone   varchar(10)
 );
+drop table teacher;
 insert into teacher(name, email, dob, address, phone)
 VALUES ('Grayson', 'grayson@gmail.com', '1977-9-2', 'Nevada', '0969999880');
 insert into teacher(name, email, dob, address, phone)
@@ -130,3 +131,8 @@ create table diary(
 -- test username password student
 select s.name, s2.username, s2.password
 from student s join studentaccount s2 on s.id = s2.student_id where s.id = 1;
+alter table teacher add username varchar(20);
+alter table teacher add password varchar(20);
+alter table student add username varchar(20);
+alter table student add password varchar(20);
+

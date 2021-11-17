@@ -10,14 +10,14 @@ public class Teacher extends User{
     public Teacher() {
     }
 
-    public Teacher(String userName, String password, Date dob, String address, String email, String phone, int id, List<Course> courses) {
-        super(userName, password, dob, address, email, phone);
+    public Teacher(String userName, String password, String dob, String address, String email, String phone, int id, List<Course> courses, String name) {
+        super(userName, password, dob, address, email, phone, name);
         this.id = id;
         this.courses = courses;
     }
 
-    public Teacher(String userName, String password, Date dob, String address, String email, String phone, List<Course> courses) {
-        super(userName, password, dob, address, email, phone);
+    public Teacher(String userName, String password, String dob, String address, String email, String phone, List<Course> courses, String name) {
+        super(userName, password, dob, address, email, phone, name);
         this.courses = courses;
     }
 

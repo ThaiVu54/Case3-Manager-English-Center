@@ -5,21 +5,23 @@ import java.util.Date;
 public abstract class User {
     private String userName;
     private String password;
-    private Date dob;
+    private String dob;
     private String address;
     private String email;
     private String phone;
+    private String name;
 
     public User() {
     }
 
-    public User(String userName, String password, Date dob, String address, String email, String phone) {
+    public User(String userName, String password, String dob, String address, String email, String phone, String name) {
         this.userName = userName;
         this.password = password;
         this.dob = dob;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.name = name;
     }
 
     public String getUserName() {
@@ -38,11 +40,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -68,5 +70,13 @@ public abstract class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
