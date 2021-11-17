@@ -1,6 +1,6 @@
 package model;
 
-public class MinistryAccout {
+public class MinistryAccout  {
     private String userName;
     private String password;
     private int ministryId;

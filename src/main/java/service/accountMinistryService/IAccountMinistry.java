@@ -11,7 +11,7 @@ public interface IAccountMinistry {
 
     void addAccMinistry(Ministry ministry) throws SQLException;
 
-    boolean updateAccMinistry(Ministry ministry) throws SQLException;
+    public boolean updateAccMinistry(MinistryAccout ministryAccout) throws SQLException;
 
     boolean deleteAccMinistry(int id) throws SQLException;
 }
