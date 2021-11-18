@@ -3,8 +3,10 @@ package service.gradeservice;
 import config.ConnectSingleton;
 import model.Course;
 import model.Grade;
+import model.Student;
 import model.Teacher;
 import service.courseservice.CourseService;
+import service.studentService.StudentService;
 import service.teacherservice.TeacherSevice;
 
 import java.sql.CallableStatement;
@@ -18,6 +20,7 @@ public class GradeService implements IGradeService{
     private GradeService(){}
     TeacherSevice teacherSevice = TeacherSevice.getInstance();
     CourseService courseService = CourseService.getInstance();
+    StudentService studentService = StudentService.getInstance();
 
     private static GradeService gradeService = new GradeService();
     public static GradeService getInstance(){
@@ -48,6 +51,11 @@ try(Connection connection = ConnectSingleton.getConnection(); CallableStatement 
         String teacherPasswword = callableStatement.getString(16);
         List<Teacher> teacherList = teacherSevice.selectAllTeacherbyCourseid(courseID);
         Course course = new Course(courseID,courseName,teacherList);
+        List<Course> courseList = courseService.selectAllCourse();
+        Teacher teacher = new Teacher(teacherUserName,teacherPasswword,teacerDob,teacherAddress,teacherEmail,teacherPhone,teacherID,courseList,teacherName);
+        List<Student> studentList = studentService.seeAllStudent();
+        Grade grade = new Grade(gradeID,gradeName,teacher,course,studentList,);
+
 
 
 

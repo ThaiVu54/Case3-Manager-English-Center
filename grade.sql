@@ -50,14 +50,16 @@ begin
     from grade g
              join course_teacher ct on g.course_teacher_id = ct.id
              join course c on c.id = ct.course_id
-             join teacher t on t.id = ct.teacher_id;
-    end $$
+             join teacher t on t.id = ct.teacher_id
+             join diary d on g.id = d.grade_id;
+end $$
 delimiter ;
+drop procedure selectAllGrade;
 call selectAllGrade();
 
 delimiter $$
 create procedure selectGradeByID(
-gradeID int
+    gradeID int
 )
 begin
     select *
