@@ -15,8 +15,8 @@ import java.util.List;
 
 @WebServlet(name = "TeacherServlet", value = "/TeacherServlet")
 public class TeacherServlet extends HttpServlet {
-    private TeacherSevice teacherService= TeacherSevice.getTeacherSevice();
-    private CourseService courseService= CourseService.getCourseService();
+    private TeacherSevice teacherService= TeacherSevice.getInstance();
+    private CourseService courseService= CourseService.getInstance();
     private TeacherConnectSourceService teacherConnectSourceService = TeacherConnectSourceService.getTeacherConnectSourceService();
 
     @Override

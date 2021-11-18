@@ -25,17 +25,6 @@ public class Ministry{
         this.address = address;
         this.phone = phone;
     }
-
-
-    public Ministry(String userName, String password, String dob, String address, String email, String phone, int id, String name) {
-        super(userName, password, dob, address, email, phone, name);
-        this.id = id;
-    }
-
-    public Ministry(String userName, String password, String dob, String address, String email, String phone, String name) {
-        super(userName, password, dob, address, email, phone, name);
-    }
-
     public Ministry(String name, String email, String dob, String address, String phone) {
         this.name = name;
         this.email = email;

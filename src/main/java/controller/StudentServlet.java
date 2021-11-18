@@ -2,7 +2,6 @@ package controller;
 
 import model.Grade;
 import model.Student;
-import service.gradeservice.GradeService;
 import service.studentService.IStudentService;
 import service.studentService.StudentService;
 
@@ -15,7 +14,6 @@ import java.util.List;
 @WebServlet(name = "StudentServlet", value = "/StudentServlet")
 public class StudentServlet extends HttpServlet {
     IStudentService studentService = StudentService.getInstance();
-    GradeService gradeService = GradeService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -93,11 +91,11 @@ public class StudentServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int id = Integer.parseInt(request.getParameter("id"));
         int gradeID = Integer.parseInt(request.getParameter("gradID"));
-        Grade grade = gradeService.selectGradebyId(gradeID);
+//        Grade grade = gradeService.selectGradebyId(gradeID);
         double mark = Double.parseDouble(request.getParameter("mark"));
         String name = request.getParameter("name");
-        Student student = new Student(userName, password, dob, address, email, phone, id, grade, mark, name);
-        studentService.addNewStudent(student);
+//        Student student = new Student(userName, password, dob, address, email, phone, id, grade, mark, name);
+//        studentService.addNewStudent(student);
         RequestDispatcher dispatcher = request.getRequestDispatcher("");
         try {
             dispatcher.forward(request, response);

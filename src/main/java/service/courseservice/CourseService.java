@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseService implements ICourseService{
-private CourseService(){}
+public CourseService(){}
 
     private static CourseService courseService = new CourseService();
 public static CourseService getInstance() {
@@ -18,28 +18,6 @@ public static CourseService getInstance() {
     return courseService;
 }
     private List<Course> courses;
-
-    private TeacherSevice teacherSevice = TeacherSevice.getInstance();
-
-    @Override
-    public List<Course> selectAllCoursebyTecherId(int id) {
-        courses = new ArrayList<>();
-        String query = "call selectallcoursebyteacherid(?);";
-        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
-            callableStatement.setInt(1,id);
-            ResultSet rs = callableStatement.executeQuery();
-            while (rs.next()){
-                int courseid = rs.getInt(1);
-                String name = rs.getString(2);
-                List<Teacher> teachers = teacherSevice.selectAllTeacherbyCourseid(courseid);
-                courses.add(new Course(courseid, name, teachers));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return courseService;
-    }
-
     @Override
     public List<Course> selectAllCourse() {
         courses = new ArrayList<>();

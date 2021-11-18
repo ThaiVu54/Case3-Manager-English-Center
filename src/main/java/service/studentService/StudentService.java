@@ -3,7 +3,6 @@ package service.studentService;
 import config.ConnectSingleton;
 import model.Grade;
 import model.Student;
-import service.gradeservice.GradeService;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ public class StudentService implements IStudentService {
 
 
     private List<Student> students;
-    private GradeService gradeService = GradeService.getInstance();
+//    private GradeService gradeService = GradeService.getInstance();
 
     @Override
     public void addNewStudent(Student student) {
@@ -95,8 +94,8 @@ public class StudentService implements IStudentService {
                 int gradeid = callableStatement.getInt(8);
                 String username = callableStatement.getString(9);
                 String password = callableStatement.getString(10);
-                Grade grade = gradeService.selectGradebyId(gradeid);
-                student = new Student(username, password, dob, address, email, phone, id, grade, mark, name);
+//                Grade grade = gradeService.selectGradebyId(gradeid);
+//                student = new Student(username, password, dob, address, email, phone, id, grade, mark, name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,8 +120,8 @@ public class StudentService implements IStudentService {
                 String username = callableStatement.getString(8);
                 String password = callableStatement.getString(9);
                 int gradeid = callableStatement.getInt(10);
-                Grade grade = gradeService.selectGradebyId(gradeid);
-                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
+//                Grade grade = gradeService.selectGradebyId(gradeid);
+//                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,8 +147,8 @@ public class StudentService implements IStudentService {
                 int gradeid = rs.getInt(8);
                 String username = rs.getString(9);
                 String password = rs.getString(10);
-                Grade grade = gradeService.selectGradebyId(gradeid);
-                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
+//                Grade grade = gradeService.selectGradebyId(gradeid);
+//                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
             }
 
         } catch (SQLException e) {
