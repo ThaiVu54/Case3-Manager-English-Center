@@ -100,6 +100,32 @@ public class MinistryServlet extends HttpServlet {
             case "edit":
                 editMinistry(request,response);
                 break;
+            default:
+                ministryLogin(request,response);
+        }
+    }
+
+    private void ministryLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Ministry ministry=null;
+        boolean checked = false;
+        List<Ministry> ministryList = ministryService.showMinistry();
+        for (Ministry ministry1: ministryList
+             ) {
+            if (ministry1.getUsername().equals(username) && ministry1.getPassword().equals(password) ){
+                ministry = ministry1;
+                checked = true;
+                break;
+            }
+            if (checked){
+                request.setAttribute("message", "Login successful");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/homepage.jsp");
+                dispatcher.forward(request,response);
+            }else {
+                request.setAttribute("message","Login fail");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/login.jsp");
+            }
         }
     }
 
@@ -139,6 +165,4 @@ public class MinistryServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-
 }
