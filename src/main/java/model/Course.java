@@ -13,6 +13,14 @@ public class Course {
         this.teachers = teachers;
     }
 
+    public Course(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public void addTeacher(Teacher teacher){
+        teachers.add(teacher);
+    }
+
     public Course(String name, List<Teacher> teachers) {
         this.name = name;
         this.teachers = teachers;

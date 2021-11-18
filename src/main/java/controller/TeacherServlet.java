@@ -11,10 +11,10 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "TecherServlet", value = "/teacherservlet")
-public class TecherServlet extends HttpServlet {
-    private ITeacherService teacherService= new TeacherSevice();
-    private ICourseService courseService= new CourseService();
+@WebServlet(name = "TeacherServlet", value = "/TeacherServlet")
+public class TeacherServlet extends HttpServlet {
+    private ITeacherService teacherService= TeacherSevice.getTeacherSevice();
+    private ICourseService courseService= CourseService.getCourseService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,9 +22,9 @@ public class TecherServlet extends HttpServlet {
         if (action == null){
             action = "";
         }
-        switch (action){
-            default: teacherLoginView(request, response); break;
-        }
+//        switch (action){
+//            default: teacherLoginView(request, response); break;
+//        }
     }
 
     private void teacherLoginView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

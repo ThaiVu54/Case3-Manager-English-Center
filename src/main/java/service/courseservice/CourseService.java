@@ -11,7 +11,14 @@ import java.util.List;
 
 public class CourseService implements ICourseService{
     private List<Course> courses;
-    private TeacherSevice teacherSevice = new TeacherSevice();
+    private TeacherSevice teacherSevice = TeacherSevice.getTeacherSevice();
+    private static CourseService courseService;
+    public static CourseService getCourseService(){
+        if (courseService == null){
+            courseService = new CourseService();
+        }
+        return courseService;
+    }
 
     @Override
     public List<Course> selectAllCoursebyTecherId(int id) {
@@ -23,8 +30,19 @@ public class CourseService implements ICourseService{
             while (rs.next()){
                 int courseid = rs.getInt(1);
                 String name = rs.getString(2);
-                List<Teacher> teachers = teacherSevice.selectAllTeacherbyCourseid(courseid);
-                courses.add(new Course(courseid, name, teachers));
+                int teacherid = rs.getInt(3);
+                String teachername = rs.getString(4);
+                String email = rs.getString(5);
+                String phone = rs.getString(6);
+                String dob = rs.getString(7);
+                String address = rs.getString(8);
+                String username = rs.getString(9);
+                String password = rs.getString(10);
+                Teacher teacher = new Teacher(username, password, dob, address, email, phone, teachername, teacherid);
+                Course course = new Course(courseid, name);
+                teacher.addCourse(course);
+                course.addTeacher(teacher);
+                courses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,8 +59,19 @@ public class CourseService implements ICourseService{
             while (rs.next()){
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
-                List<Teacher> teachers = teacherSevice.selectAllTeacherbyCourseid(id);
-                courses.add(new Course(id, name, teachers));
+                int teacherid = rs.getInt(3);
+                String teachername = rs.getString(4);
+                String email = rs.getString(5);
+                String phone = rs.getString(6);
+                String address = rs.getString(7);
+                String dob = rs.getString(8);
+                String username = rs.getString(9);
+                String password = rs.getString(10);
+                Course course = new Course(id, name);
+                Teacher teacher = new Teacher(username, password, dob, address, email, phone, teachername, teacherid);
+                teacher.addCourse(course);
+                course.addTeacher(teacher);
+                courses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();

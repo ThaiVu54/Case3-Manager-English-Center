@@ -3,9 +3,10 @@ delimiter $$
 -- hien thi toan bo giao vien
 create procedure selectallteacher()
 begin
-    select *
-    from teacher;
+    select t.id, t.name, t.email, t.dob, t.address, t.phone, t.username, t.password, c.id, c.name
+    from teacher t left join course_teacher ct on t.id = ct.teacher_id left join course c on ct.course_id = c.id;
 end $$
+
 delimiter ;
 drop procedure selectallteacher;
 call selectallteacher();
@@ -100,7 +101,8 @@ call insertcourse_teacher(8,1);
 delimiter $$
 create procedure selectallcourse()
 begin
-    select * from course;
+    select c.id, c.name, t.id, t.name, t.email, t.phone, t.address, t.dob, t.username, t.password
+    from course c left join course_teacher ct on c.id = ct.course_id left join teacher t on ct.teacher_id = t.id group by c.id;
 end $$
 delimiter ;
 drop procedure selectallcourse;
@@ -163,8 +165,8 @@ create procedure selectallcoursebyteacherid(
     teacherid int
 )
 begin
-    select c.id, c.name
-        from course c join course_teacher ct on c.id = ct.course_id where teacher_id = teacherid;
+    select c.id, c.name, t.id, t.name, t.email, t.phone, t.dob, t.address, t.username, t.password
+        from course c join course_teacher ct on c.id = ct.course_id join teacher t on ct.teacher_id = t.id where t.id = teacherid;
 end $$
 delimiter ;
 call selectallcoursebyteacherid(1);
@@ -176,8 +178,8 @@ create procedure selectallteacherbycourseid(
     courseid int
 )
 begin
-    select t.id, t.name, t.phone, t.dob, t.address, t.email, t.username, t.password
-        from teacher t join course_teacher ct on t.id = ct.teacher_id where ct.course_id = courseid;
+    select t.id, t.name, t.phone, t.dob, t.address, t.email, t.username, t.password, c.id, c.name
+        from teacher t join course_teacher ct on t.id = ct.teacher_id join course c on ct.course_id = c.id where ct.course_id = courseid;
 end $$
 delimiter ;
 drop procedure selectallteacherbycourseid;

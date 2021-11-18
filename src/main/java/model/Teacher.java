@@ -16,6 +16,11 @@ public class Teacher extends User{
         this.courses = courses;
     }
 
+    public Teacher(String userName, String password, String dob, String address, String email, String phone, String name, int id) {
+        super(userName, password, dob, address, email, phone, name);
+        this.id = id;
+    }
+
     public Teacher(String userName, String password, String dob, String address, String email, String phone, List<Course> courses, String name) {
         super(userName, password, dob, address, email, phone, name);
         this.courses = courses;
@@ -35,5 +40,8 @@ public class Teacher extends User{
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+    public void addCourse(Course course){
+        courses.add(course);
     }
 }

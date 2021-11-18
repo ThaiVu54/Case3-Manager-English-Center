@@ -11,7 +11,17 @@ import java.util.List;
 
 public class TeacherSevice implements ITeacherService{
     private List<Teacher> teachers;
-    private CourseService courseService = new CourseService();
+    private CourseService courseService = CourseService.getCourseService();
+    private static TeacherSevice teacherSevice;
+    public static TeacherSevice getTeacherSevice(){
+        if (teacherSevice == null){
+            teacherSevice = new TeacherSevice();
+        }
+        return teacherSevice;
+    }
+
+    private TeacherSevice() {
+    }
 
     @Override
     public List<Teacher> selectAllTeacherbyCourseid(int id) {
@@ -29,8 +39,13 @@ public class TeacherSevice implements ITeacherService{
                 String email = rs.getString(6);
                 String username = rs.getString(7);
                 String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(teacherid);
-                teachers.add(new Teacher(username, password, dob, address, email, phone, teacherid, courses, name));
+                int courseid = rs.getInt(9);
+                String coursename = rs.getString(10);
+                Teacher teacher = new Teacher(username, password, dob, address, email, phone, name, teacherid);
+                Course course = new Course(courseid, coursename);
+                teacher.addCourse(course);
+                course.addTeacher(teacher);
+                teachers.add(teacher);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,8 +67,13 @@ public class TeacherSevice implements ITeacherService{
                 String phone = rs.getString(6);
                 String username = rs.getString(7);
                 String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(id);
-                teachers.add(new Teacher(username, password, dob, address, email, phone, id, courses, name));
+                int courseid = rs.getInt(9);
+                String coursename = rs.getString(10);
+                Teacher teacher = new Teacher(username, password, dob, address, email, phone, name, id);
+                Course course = new Course(courseid, coursename);
+                course.addTeacher(teacher);
+                teacher.addCourse(course);
+                teachers.add(teacher);
             }
         } catch (SQLException e) {
             e.printStackTrace();
