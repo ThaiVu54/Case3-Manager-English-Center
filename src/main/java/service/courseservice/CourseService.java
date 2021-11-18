@@ -10,8 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseService implements ICourseService{
+private CourseService(){}
+
+    private static CourseService courseService = new CourseService();
+public static CourseService getInstance() {
+    if (courseService == null) {
+        courseService = new CourseService();
+    }
+    return courseService;
+}
     private List<Course> courses;
-    private TeacherSevice teacherSevice = new TeacherSevice();
+    private TeacherSevice teacherSevice = TeacherSevice.getInstance();
 
     @Override
     public List<Course> selectAllCoursebyTecherId(int id) {

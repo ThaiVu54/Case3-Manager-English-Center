@@ -13,6 +13,17 @@ public class TeacherSevice implements ITeacherService{
     private List<Teacher> teachers;
     private CourseService courseService = new CourseService();
 
+private TeacherSevice(){}
+
+    private static TeacherSevice teacherSevice = new TeacherSevice();
+
+public static TeacherSevice getInstance() {
+    if (teacherSevice == null) {
+        teacherSevice = new TeacherSevice();
+    }
+    return teacherSevice;
+}
+
     @Override
     public List<Teacher> selectAllTeacherbyCourseid(int id) {
         teachers = new ArrayList<>();

@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "StudentServlet", value = "/StudentServlet")
 public class StudentServlet extends HttpServlet {
-    IStudentService studentService = new StudentService();
+    IStudentService studentService = StudentService.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

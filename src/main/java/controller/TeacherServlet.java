@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "TecherServlet", value = "/teacherservlet")
-public class TecherServlet extends HttpServlet {
-    private ITeacherService teacherService= new TeacherSevice();
-    private ICourseService courseService= new CourseService();
+public class TeacherServlet extends HttpServlet {
+    private ITeacherService teacherService= TeacherSevice.getInstance();
+    private ICourseService courseService= CourseService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

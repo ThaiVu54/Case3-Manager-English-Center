@@ -3,10 +3,7 @@ package service.studentService;
 import config.ConnectSingleton;
 import model.Grade;
 import model.Student;
-import model.Teacher;
 import service.gradeservice.GradeService;
-import service.teacherservice.TeacherSevice;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,8 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentService implements IStudentService {
+    private StudentService() {
+    }
+
+    private static StudentService studentService = new StudentService();
+
+    public static StudentService getInstance() {
+        if (studentService == null) {
+            studentService = new StudentService();
+        }
+        return studentService;
+    }
+
+
     private List<Student> students;
-    private GradeService gradeService = new GradeService();
+    private GradeService gradeService = GradeService.getInstance();
 
     @Override
     public void addNewStudent(Student student) {
@@ -72,10 +82,10 @@ public class StudentService implements IStudentService {
     public Student getStudentByID(int id) {
         Student student = null;
         String query = "call getStudentInforByID(?);";
-        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+        try (Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
             callableStatement.setInt(1, id);
             ResultSet rs = callableStatement.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 String name = callableStatement.getString(2);
                 String email = callableStatement.getString(3);
                 double mark = callableStatement.getDouble(4);
@@ -124,10 +134,10 @@ public class StudentService implements IStudentService {
     public List<Student> selectListStudentByGradeId(int id) {
         students = new ArrayList<>();
         String query = "call selectstudentbygradeid(?);";
-        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
-            callableStatement.setInt(1,id);
+        try (Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1, id);
             ResultSet rs = callableStatement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int studentid = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
