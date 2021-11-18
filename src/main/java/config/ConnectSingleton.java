@@ -12,7 +12,7 @@ public class ConnectSingleton {
         if (connection == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo_m3", "root", "123456@Abc");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/case3", "root", "123456@Abc");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
@@ -20,9 +20,8 @@ public class ConnectSingleton {
         System.out.println("da ket noi");
         return connection;
     }
+
 }
-
-
 
 
 

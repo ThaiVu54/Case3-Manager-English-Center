@@ -1,37 +1,28 @@
 package model;
 
-//import java.util.Date;
-import java.sql.Date;
-
-
-public class Ministry{
+public class Ministry {
     private int id;
     private String name;
     private String email;
     private String dob;
     private String address;
     private String phone;
+    private String username;
+    private String password;
 
     public Ministry() {
     }
 
-    public Ministry(int id, String name, String email, String dob, String address, String phone) {
+    public Ministry(int id, String name, String email, String dob, String address, String phone, String username, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.dob = dob;
         this.address = address;
         this.phone = phone;
+        this.username = username;
+        this.password = password;
     }
-
-    public Ministry(String name, String email, String dob, String address, String phone) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-        this.address = address;
-        this.phone = phone;
-    }
-
 
     public int getId() {
         return id;
@@ -80,4 +71,21 @@ public class Ministry{
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
+
