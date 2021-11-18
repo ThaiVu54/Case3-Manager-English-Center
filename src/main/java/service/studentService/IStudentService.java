@@ -10,4 +10,5 @@ public interface IStudentService {
     boolean updateStudent(Student student);
     void deleteStudent(int id);
    public Student getStudentByID(int id);
+   List<Student> selectListStudentByGradeId(int id);
 }

@@ -136,4 +136,29 @@ public class TeacherSevice implements ITeacherService{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Teacher selectTecherByGradeId(int id) {
+        String query = "call selectteacherbygradeid(?);";
+        Teacher teacher = null;
+        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1, id);
+            ResultSet rs = callableStatement.executeQuery();
+            if (rs.next()){
+                int teacherid = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String dob = rs.getString(4);
+                String address = rs.getString(5);
+                String phone = rs.getString(6);
+                String username = rs.getString(7);
+                String password = rs.getString(8);
+                List<Course> courses = courseService.selectAllCoursebyTecherId(teacherid);
+                teacher = new Teacher(username, password, dob, address, email, phone, id, courses, name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teacher;
+    }
 }

@@ -109,4 +109,22 @@ public class CourseService implements ICourseService{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Course selectCoursebyIdGrade(int id) {
+        Course course = null;
+        String query = "call selectcourbyId(?);";
+        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            ResultSet rs = callableStatement.executeQuery();
+            if (rs.next()){
+                int courseid = rs.getInt(1);
+                String name = rs.getString(2);
+                List<Teacher> teacher = teacherSevice.selectAllTeacherbyCourseid(courseid);
+                course = new Course(courseid, name, teacher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return course;
+    }
 }

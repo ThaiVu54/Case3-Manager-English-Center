@@ -1,5 +1,4 @@
-use
-    demo3;
+use english_center;
 
 # Student
 
@@ -82,10 +81,13 @@ begin
            s.dob,
            s.address,
            s.phone,
-           g.name
+           s.username,
+           s.password,
+           g.id
     from student s
              join grade g on s.grade_id = g.id;
 end $$
+
 delimiter ;
 drop procedure selectAllStudents;
 call selectAllStudents();
@@ -96,23 +98,55 @@ create procedure getStudentInforByID(
     studentID int
 )
 begin
-    select s.name as StudentName,
-           s.email,
-           s.mark,
-           s.dob as DateOfBirth,
-           s.address,
-           s.phone,
-           s.username,
-           g.name as GradeName,
-           c.name as CourseName
-    from student s
-             join grade g on s.grade_id = g.id
-             join course_teacher on g.course_teacher_id = course_teacher.id
-             join course c on course_teacher.course_id = c.id
-    where s.id = studentID;
+    select * from student where id = studentID;
 end $$
 delimiter ;
 drop procedure getStudentInforByID;
 call getStudentInforByID(2);
+
+delimiter $$
+create procedure selectstudentbygradeid(
+    gradeid int
+)
+begin
+    select *
+    from student s
+             join grade g on g.id = s.grade_id
+    where grade_id = gradeid;
+end $$
+
+delimiter ;
+drop procedure selectstudentbygradeid;
+call selectstudentbygradeid(2);
+
+-- Lấy ra khóa học từ id grade
+delimiter $$
+create procedure selectcourbyId(
+    gradeid int
+)
+begin
+    select c.id, c.name
+    from course c
+             join course_teacher ct on c.id = ct.course_id
+             join grade g on ct.id = g.course_teacher_id;
+end $$
+delimiter ;
+call selectcourbyId(3);
+
+delimiter $$
+create procedure selectteacherbygradeid(
+    gradeid int
+)
+begin
+    select *
+    from teacher t
+             join course_teacher ct on t.id = ct.teacher_id
+             join grade g on ct.id = g.course_teacher_id
+    where g.id = gradeid;
+end $$
+delimiter ;
+
+drop procedure selectteacherbygradeid;
+call selectteacherbygradeid(2);
 
 

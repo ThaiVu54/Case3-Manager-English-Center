@@ -12,4 +12,5 @@ public interface ITeacherService {
     void updateTeacher(Teacher teacher);
     void deleteTeacherById(int id);
     List<Teacher> selectAllTeacherbyCourseid(int id);
+    Teacher selectTecherByGradeId(int id);
 }

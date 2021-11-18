@@ -17,11 +17,6 @@ public class Student extends User{
         this.mark = mark;
     }
 
-    public Student(String userName,String dob, String address, String email, String phone,double mark,String name ) {
-     super(userName, dob, address, email, phone, name);
-     this.mark = mark;
-    }
-
     public Student(String userName, String password, String dob, String address, String email, String phone, Grade grade, double mark,String name) {
         super(userName, password, dob, address, email, phone, name);
         this.grade = grade;

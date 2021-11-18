@@ -3,6 +3,9 @@ package service.studentService;
 import config.ConnectSingleton;
 import model.Grade;
 import model.Student;
+import model.Teacher;
+import service.gradeservice.GradeService;
+import service.teacherservice.TeacherSevice;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentService implements IStudentService {
-
+    private List<Student> students;
+    private GradeService gradeService = new GradeService();
 
     @Override
     public void addNewStudent(Student student) {
@@ -66,55 +70,81 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student getStudentByID(int id) {
-        return null;
+        Student student = null;
+        String query = "call getStudentInforByID(?);";
+        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1, id);
+            ResultSet rs = callableStatement.executeQuery();
+            if (rs.next()){
+                String name = callableStatement.getString(2);
+                String email = callableStatement.getString(3);
+                double mark = callableStatement.getDouble(4);
+                String dob = callableStatement.getString(5);
+                String address = callableStatement.getString(6);
+                String phone = callableStatement.getString(7);
+                int gradeid = callableStatement.getInt(8);
+                String username = callableStatement.getString(9);
+                String password = callableStatement.getString(10);
+                Grade grade = gradeService.selectGradebyId(gradeid);
+                student = new Student(username, password, dob, address, email, phone, id, grade, mark, name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
     }
-
-//    @Override
-//    public Student getStudentByID(int id) {
-//        Student student = null;
-//        String query = "call getStudentInforByID(?); ";
-//        try (Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
-//            callableStatement.setInt(1, id);
-//            ResultSet rs = callableStatement.executeQuery();
-//            if (rs.next()) {
-//                String studentName = rs.getString(1);
-//                String email = rs.getString(2);
-//                double mark = rs.getDouble(3);
-//                String dob = rs.getString(4);
-//                String address = rs.getString(5);
-//                String phone = rs.getString(6);
-//                String userName = rs.getString(7);
-//                String gradeName = rs.getString(8);
-//                String courseName = rs.getString(9);
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     @Override
     public List<Student> seeAllStudent() {
         String query = "call selectAllStudents();";
-        List<Student> studentList = new ArrayList<>();
+        students = new ArrayList<>();
         try (Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
-                String studentName = rs.getString(2);
+                int studentid = callableStatement.getInt(1);
+                String name = callableStatement.getString(2);
+                String email = callableStatement.getString(3);
+                double mark = callableStatement.getDouble(4);
+                String dob = callableStatement.getString(5);
+                String address = callableStatement.getString(6);
+                String phone = callableStatement.getString(7);
+                String username = callableStatement.getString(8);
+                String password = callableStatement.getString(9);
+                int gradeid = callableStatement.getInt(10);
+                Grade grade = gradeService.selectGradebyId(gradeid);
+                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    @Override
+    public List<Student> selectListStudentByGradeId(int id) {
+        students = new ArrayList<>();
+        String query = "call selectstudentbygradeid(?);";
+        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1,id);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()){
+                int studentid = rs.getInt(1);
+                String name = rs.getString(2);
                 String email = rs.getString(3);
                 double mark = rs.getDouble(4);
                 String dob = rs.getString(5);
                 String address = rs.getString(6);
                 String phone = rs.getString(7);
-                String userName = rs.getString(7);
-                String gradeName = rs.getString(8);
-                Student student = new Student(userName, dob, address, email, phone, mark, studentName);
-                studentList.add(student);
+                int gradeid = rs.getInt(8);
+                String username = rs.getString(9);
+                String password = rs.getString(10);
+                Grade grade = gradeService.selectGradebyId(gradeid);
+                students.add(new Student(username, password, dob, address, email, phone, studentid, grade, mark, name));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return studentList;
+        return students;
     }
 }

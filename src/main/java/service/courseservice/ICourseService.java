@@ -11,4 +11,5 @@ public interface ICourseService {
     void addCourse(Course course, int[] teacherid);
     void updateCourse(Course course);
     void deleteCourse(Course course);
+    Course selectCoursebyIdGrade(int id);
 }

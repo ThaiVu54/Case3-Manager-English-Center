@@ -1,6 +1,8 @@
 package controller;
 import model.Teacher;
 import service.courseservice.CourseService;
+import service.courseservice.ICourseService;
+import service.teacherservice.ITeacherService;
 import service.teacherservice.TeacherSevice;
 
 import javax.servlet.*;
@@ -11,14 +13,9 @@ import java.util.List;
 
 @WebServlet(name = "TecherServlet", value = "/teacherservlet")
 public class TecherServlet extends HttpServlet {
-    private TeacherSevice teacherService;
-    private CourseService courseService;
+    private ITeacherService teacherService= new TeacherSevice();
+    private ICourseService courseService= new CourseService();
 
-    @Override
-    public void init() throws ServletException {
-        teacherService = new TeacherSevice();
-        courseService = new CourseService();
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
