@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Thai Vu
-  Date: 17-Nov-21
-  Time: 8:27 PM
+  Date: 18-Nov-21
+  Time: 11:23 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -45,11 +45,11 @@
     }
 </style>
 <head>
-    <title>Edit Ministry</title>
+    <title>Add New Ministry</title>
 </head>
 <body>
 <center>
-    <h1><a href="/ministries?action=show" style="border: none; color: #dc3545; text-decoration: none">Edit Ministry</a></h1>
+    <h1>>Add New Ministry</h1>
     <h1><a href="/ministries?action=show">Ministry Manager</a></h1>
 
 </center>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <th>Date of birth:</th>
-                <td><input type="date" name="dob" size="45" value="${ministry.getDob()}"></td>
+                <td><input type="text" name="dob" size="45" value="${ministry.getDob()}"></td>
             </tr>
             <tr>
                 <th>Address:</th>

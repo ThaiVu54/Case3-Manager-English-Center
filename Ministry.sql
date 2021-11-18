@@ -39,5 +39,15 @@ begin
 end; $$
 DELIMITER ;
 
-call find_id_ministry(2)
+call find_id_ministry(2);
+
+Delimiter $$
+create procedure create_ministry(in name_m varchar(40), in email_m varchar(40), in dob_m varchar(40), in address_m varchar(40), in phone_m varchar(40) )
+begin
+    INSERT INTO ministry (name, email, dob, address, phone) VALUES (name_m,email_m,dob_m,address_m,phone_m);
+end; $$
+DELIMITER ;
+drop procedure create_ministry;
+call create_ministry('thai','thai@gmail.com','1999-1-1','nam dinh','0909880834');
+
 

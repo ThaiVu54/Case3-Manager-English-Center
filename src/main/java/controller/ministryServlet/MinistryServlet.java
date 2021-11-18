@@ -32,15 +32,26 @@ public class MinistryServlet extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-            case "insert":
+            case "create":
+                showNewForm(request, response);
                 break;
             case "delete":
-                deleteMinistry(request,response);
+                deleteMinistry(request, response);
                 break;
             default:
                 break;
         }
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/create.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
         }
+    }
+
 
     private void deleteMinistry(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -86,8 +97,27 @@ public class MinistryServlet extends HttpServlet {
             case "edit":
                 editMinistry(request, response);
                 break;
-            case "insert":
+            case "create":
+                createMinistry(request, response);
                 break;
+        }
+    }
+
+    private void createMinistry(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        Ministry ministry = new Ministry(name, email, dob, address, phone);
+        try {
+            ministryService.addMinistry(ministry);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/create.jsp");
+            request.setAttribute("ministry",ministry);
+            request.setAttribute("message", "CREATED");
+            dispatcher.forward(request, response);
+        } catch (SQLException | IOException | ServletException e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,7 +128,7 @@ public class MinistryServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        Ministry ministry1 = new Ministry(id,name, email, dob, address, phone);
+        Ministry ministry1 = new Ministry(id, name, email, dob, address, phone);
         try {
             ministryService.updateMinistry(ministry1);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit.jsp");

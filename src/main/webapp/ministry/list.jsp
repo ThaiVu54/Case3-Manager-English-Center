@@ -23,37 +23,42 @@
 <center>
     <h1 style="color: #dc3545; text-decoration: none">Ministry Manager</h1>
 </center>
-<div align="center">
-    <table border="1" cellpadding="5" class="table table-info table-hover table-striped">
-        <tr>
-            <td colspan="7" style="text-align: center"><h4>Ministry</h4></td>
-        </tr>
-        <tr>
-            <th>ID</th>
-            <th>Name Ministry</th>
-            <th>Email</th>
-            <th>Date of birth</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Action</th>
-
-        </tr>
-        <c:forEach items='${requestScope["ministry"]}' var="m">
+<%--<div style="margin-right: 300px">--%>
+    <div align="center">
+        <table border="1" cellpadding="5" class="table table-info table-hover table-striped" style="text-align: center">
             <tr>
-                <td><c:out value="${m.getId()}"/></td>
-                <td><c:out value="${m.getName()}"/></td>
-                <td><c:out value="${m.getEmail()}"/></td>
-                <td><c:out value="${m.getDob()}"/></td>
-                <td><c:out value="${m.getAddress()}"/></td>
-                <td><c:out value="${m.getPhone()}"/></td>
-                <td>
-                    <a href="/ministries?action=edit&id=${m.getId()}">Edit</a>
-                    <a href="/ministries?action=delete&id=${m.getId()}">Delete</a>
-                </td>
+                <td colspan="7" style="text-align: center"><h4>Ministry</h4></td>
             </tr>
-        </c:forEach>
-    </table>
-</div>
+            <tr>
+                <th>ID</th>
+                <th>Name Ministry</th>
+                <th>Email</th>
+                <th>Date of birth</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Action</th>
+
+            </tr>
+            <c:forEach items='${requestScope["ministry"]}' var="m">
+                <tr>
+                    <td><c:out value="${m.getId()}"/></td>
+                    <td><c:out value="${m.getName()}"/></td>
+                    <td><c:out value="${m.getEmail()}"/></td>
+                    <td><c:out value="${m.getDob()}"/></td>
+                    <td><c:out value="${m.getAddress()}"/></td>
+                    <td><c:out value="${m.getPhone()}"/></td>
+                    <td>
+                        <a href="/ministries?action=edit&id=${m.getId()}">Edit</a>
+
+                        <a href="/ministries?action=delete&id=${m.getId()}">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        <h3><a href="/ministries?action=create" style=" color: darkturquoise; text-decoration: none">Add new Book Ministry</a></h3>
+    </div>
+<%--</div>--%>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
