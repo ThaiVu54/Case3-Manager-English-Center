@@ -102,10 +102,6 @@ public class MinistryService implements IMinistry {
 
         preparedStatement.executeUpdate();
     }
-    public static void main(String[] args) throws SQLException {
-        MinistryService ministryService = new MinistryService();
-        ministryService.addMinistry(new Ministry("a","a","1112-12-2","a","00942","anh","anh"));
-    }
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
