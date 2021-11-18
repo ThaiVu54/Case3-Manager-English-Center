@@ -1,4 +1,4 @@
-package controller;
+package controller.teacherservlet;
 import model.Teacher;
 import service.courseservice.CourseService;
 import service.courseservice.ICourseService;
