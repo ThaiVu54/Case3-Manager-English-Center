@@ -2,6 +2,8 @@ package controller;
 import model.Teacher;
 import service.courseservice.CourseService;
 import service.courseservice.ICourseService;
+import service.teacherconnectsourse.ITeacherConnectSourceService;
+import service.teacherconnectsourse.TeacherConnectSourceService;
 import service.teacherservice.ITeacherService;
 import service.teacherservice.TeacherSevice;
 
@@ -11,10 +13,11 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "TecherServlet", value = "/teacherservlet")
-public class TecherServlet extends HttpServlet {
-    private ITeacherService teacherService= new TeacherSevice();
-    private ICourseService courseService= new CourseService();
+@WebServlet(name = "TeacherServlet", value = "/TeacherServlet")
+public class TeacherServlet extends HttpServlet {
+    private TeacherSevice teacherService= TeacherSevice.getTeacherSevice();
+    private CourseService courseService= CourseService.getCourseService();
+    private TeacherConnectSourceService teacherConnectSourceService = TeacherConnectSourceService.getTeacherConnectSourceService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

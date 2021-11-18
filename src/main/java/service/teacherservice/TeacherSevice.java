@@ -1,41 +1,22 @@
 package service.teacherservice;
 
 import config.ConnectSingleton;
-import model.Course;
 import model.Teacher;
-import service.courseservice.CourseService;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherSevice implements ITeacherService{
     private List<Teacher> teachers;
-    private CourseService courseService = new CourseService();
-
-    @Override
-    public List<Teacher> selectAllTeacherbyCourseid(int id) {
-        teachers = new ArrayList<>();
-        String query = "call selectallteacherbycourseid(?);";
-        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
-            callableStatement.setInt(1, id);
-            ResultSet rs = callableStatement.executeQuery();
-            while (rs.next()){
-                int teacherid = rs.getInt(1);
-                String name = rs.getString(2);
-                String phone = rs.getString(3);
-                String dob = rs.getString(4);
-                String address = rs.getString(5);
-                String email = rs.getString(6);
-                String username = rs.getString(7);
-                String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(teacherid);
-                teachers.add(new Teacher(username, password, dob, address, email, phone, teacherid, courses, name));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private static TeacherSevice teacherSevice;
+    public static TeacherSevice getTeacherSevice(){
+        if (teacherSevice == null){
+            teacherSevice = new TeacherSevice();
         }
-        return teachers;
+        return teacherSevice;
+    }
+
+    public TeacherSevice() {
     }
     @Override
     public List<Teacher> selectAllTeacher() {
@@ -52,8 +33,7 @@ public class TeacherSevice implements ITeacherService{
                 String phone = rs.getString(6);
                 String username = rs.getString(7);
                 String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(id);
-                teachers.add(new Teacher(username, password, dob, address, email, phone, id, courses, name));
+                teachers.add(new Teacher(username, password, dob, address, email, phone, name, id));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,8 +56,7 @@ public class TeacherSevice implements ITeacherService{
                 String phone = rs.getString(6);
                 String username = rs.getString(7);
                 String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(id);
-                teacher = new Teacher(username, password, dob, address, email, phone, id, courses, name);
+                teacher = new Teacher(username, password, dob, address, email, phone, name, id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,30 +114,5 @@ public class TeacherSevice implements ITeacherService{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public Teacher selectTecherByGradeId(int id) {
-        String query = "call selectteacherbygradeid(?);";
-        Teacher teacher = null;
-        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
-            callableStatement.setInt(1, id);
-            ResultSet rs = callableStatement.executeQuery();
-            if (rs.next()){
-                int teacherid = rs.getInt(1);
-                String name = rs.getString(2);
-                String email = rs.getString(3);
-                String dob = rs.getString(4);
-                String address = rs.getString(5);
-                String phone = rs.getString(6);
-                String username = rs.getString(7);
-                String password = rs.getString(8);
-                List<Course> courses = courseService.selectAllCoursebyTecherId(teacherid);
-                teacher = new Teacher(username, password, dob, address, email, phone, id, courses, name);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return teacher;
     }
 }

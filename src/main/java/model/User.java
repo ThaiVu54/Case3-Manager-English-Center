@@ -24,15 +24,6 @@ public abstract class User {
         this.name = name;
     }
 
-    public User(String userName, String dob, String address, String email, String phone, String name) {
-        this.userName = userName;
-        this.dob = dob;
-        this.address = address;
-        this.email = email;
-        this.phone = phone;
-        this.name = name;
-    }
-
     public String getUserName() {
         return userName;
     }

@@ -3,9 +3,9 @@ delimiter $$
 -- hien thi toan bo giao vien
 create procedure selectallteacher()
 begin
-    select *
-    from teacher;
+    select * from teacher;
 end $$
+
 delimiter ;
 drop procedure selectallteacher;
 call selectallteacher();
@@ -19,7 +19,7 @@ begin
         from teacher where id = teacherid;
 end;
 drop procedure selectteacherbyid;
-call selectteacherbyid(2);
+call selectteacherbyid(7);
 
 -- hien thi mon hoc theo idteacher
 delimiter $$
@@ -100,8 +100,10 @@ call insertcourse_teacher(8,1);
 delimiter $$
 create procedure selectallcourse()
 begin
-    select * from course;
+    select *
+    from course;
 end $$
+
 delimiter ;
 drop procedure selectallcourse;
 call  selectallcourse();
@@ -164,7 +166,7 @@ create procedure selectallcoursebyteacherid(
 )
 begin
     select c.id, c.name
-        from course c join course_teacher ct on c.id = ct.course_id where teacher_id = teacherid;
+        from course c join course_teacher ct on c.id = ct.course_id join teacher t on ct.teacher_id = t.id where t.id = teacherid;
 end $$
 delimiter ;
 call selectallcoursebyteacherid(1);
@@ -177,8 +179,16 @@ create procedure selectallteacherbycourseid(
 )
 begin
     select t.id, t.name, t.phone, t.dob, t.address, t.email, t.username, t.password
-        from teacher t join course_teacher ct on t.id = ct.teacher_id where ct.course_id = courseid;
+        from teacher t join course_teacher ct on t.id = ct.teacher_id join course c on ct.course_id = c.id where ct.course_id = courseid;
 end $$
 delimiter ;
 drop procedure selectallteacherbycourseid;
 call selectallteacherbycourseid(3);
+
+delimiter $$
+create procedure selectcourse_teacher()
+begin
+    select * from course_teacher;
+end $$
+delimiter ;
+call selectcourse_teacher();
