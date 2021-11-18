@@ -9,13 +9,13 @@ public class Ministry extends User{
         this.id = id;
     }
 
-    public Ministry(String userName, String password, Date dob, String address, String email, String phone, int id) {
-        super(userName, password, dob, address, email, phone);
+    public Ministry(String userName, String password, String dob, String address, String email, String phone, int id, String name) {
+        super(userName, password, dob, address, email, phone, name);
         this.id = id;
     }
 
-    public Ministry(String userName, String password, Date dob, String address, String email, String phone) {
-        super(userName, password, dob, address, email, phone);
+    public Ministry(String userName, String password, String dob, String address, String email, String phone, String name) {
+        super(userName, password, dob, address, email, phone, name);
     }
 
     public int getId() {
