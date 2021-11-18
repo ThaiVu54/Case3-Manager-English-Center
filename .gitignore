@@ -1,3 +1,5 @@
 build
-gradle
+.gradle
 config
+.idea
+src/main/webapp/index.jsp

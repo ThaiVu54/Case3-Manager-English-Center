@@ -11,13 +11,15 @@ import java.util.List;
 
 public class MinistryService implements IMinistry {
 
+    public static final String DELETE_FROM_MINISTRY_WHERE_ID = "delete from ministry where id=?";
+    public static final String SELECT_ID_NAME_EMAIL_DOB_ADDRESS_PHONE_FROM_MINISTRY_WHERE_ID = "select id,name,email,dob,address,phone from ministry where id = ?";
     Connection connection = ConnectSingleton.getConnection();
 
 
     @Override
     public List<Ministry> showMinistry() {
         List<Ministry> ministryList = new ArrayList<>();
-        try (PreparedStatement preparedStatement=connection.prepareStatement("select * from ministry")){
+        try (PreparedStatement preparedStatement=connection.prepareStatement("select id,name,email,dob,address,phone from ministry")){
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
@@ -37,20 +39,38 @@ public class MinistryService implements IMinistry {
         return ministryList;
     }
 
-    public static void main(String[] args) {
-        MinistryService ministryService = new MinistryService();
-        ministryService.showMinistry();
-    }
 
     @Override
     public boolean deleteMinistry(int id) throws SQLException {
-        return false;
+        boolean rowDeleted = false;
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_MINISTRY_WHERE_ID);
+        preparedStatement.setInt(1, id);
+        rowDeleted = preparedStatement.executeUpdate() > 1;
+        return rowDeleted;
     }
 
     @Override
     public Ministry findById(int id) {
-        return null;
+        Ministry ministry = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ID_NAME_EMAIL_DOB_ADDRESS_PHONE_FROM_MINISTRY_WHERE_ID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+//                int id = resultSet.getInt("id");
+                String name=resultSet.getString("name") ;
+                String email = resultSet.getString("email");
+                String dob = resultSet.getString("dob");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                ministry = new Ministry(id,name,email,dob,address,phone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ministry;
     }
+
 
     @Override
     public boolean updateMinistry(Ministry ministry) throws SQLException {
