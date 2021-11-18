@@ -21,8 +21,8 @@
            aria-describedby="emailHelp">
   </div>
   <p>
-    <c:if test='${requestScope["mess"] != null}'>
-      <span><c:out value='${sessionScope["mess"]}'></c:out></span>
+    <c:if test="${mess != null}">
+      <span>${mess}</span>
     </c:if>
   </p>
   <div class="mb-5" style="margin-left: 35px; height: 41px; width: 335px;">
