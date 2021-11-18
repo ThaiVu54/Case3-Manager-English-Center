@@ -95,9 +95,48 @@ public class MinistryServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
+                addNewMinistry(request,response);
                 break;
             case "edit":
+                editMinistry(request,response);
                 break;
+        }
+    }
+
+    private void editMinistry(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+        try {
+            ministryService.updateMinistry(new Ministry(name,email,dob,address,phone));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit.jsp");
+            dispatcher.forward(request,response);
+        } catch (SQLException | ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addNewMinistry(HttpServletRequest request, HttpServletResponse response) {
+//        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        try {
+            ministryService.addMinistry(new Ministry(name,email,dob,address,phone,username,password));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/create");
+            dispatcher.forward(request,response);
+            request.setAttribute("message","add new ministry");
+        } catch (SQLException | ServletException | IOException e) {
+            e.printStackTrace();
         }
     }
 
