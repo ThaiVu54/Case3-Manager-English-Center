@@ -35,11 +35,22 @@ public class MinistryServlet extends HttpServlet {
             case "insert":
                 break;
             case "delete":
+                deleteMinistry(request,response);
                 break;
             default:
                 break;
         }
         }
+
+    private void deleteMinistry(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+            ministryService.deleteMinistry(id);
+            response.sendRedirect("/ministries?action=show");
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
         int idMinistry = Integer.parseInt(request.getParameter("id"));
@@ -87,7 +98,7 @@ public class MinistryServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        Ministry ministry1 = new Ministry(name, email, dob, address, phone);
+        Ministry ministry1 = new Ministry(id,name, email, dob, address, phone);
         try {
             ministryService.updateMinistry(ministry1);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit.jsp");
