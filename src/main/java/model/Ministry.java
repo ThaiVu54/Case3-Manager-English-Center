@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Ministry extends User{
     private int id;
+    private String name;
 
     public Ministry(int id) {
         this.id = id;

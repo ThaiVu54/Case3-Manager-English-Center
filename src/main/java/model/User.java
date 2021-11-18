@@ -14,7 +14,7 @@ public abstract class User {
     public User() {
     }
 
-    public User(String userName, String password, String dob, String address, String email, String phone,String name) {
+    public User(String userName, String password, String dob, String address, String email, String phone, String name) {
         this.userName = userName;
         this.password = password;
         this.dob = dob;
