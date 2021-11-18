@@ -1,32 +1,20 @@
 package model;
 
-import java.util.List;
 
 public class Course {
     private int id;
     private String name;
-    private List<Teacher> teachers;
 
-    public Course(int id, String name, List<Teacher> teachers) {
-        this.id = id;
-        this.name = name;
-        this.teachers = teachers;
+    public Course() {
     }
 
     public Course(int id, String name) {
         this.id = id;
         this.name = name;
     }
-    public void addTeacher(Teacher teacher){
-        teachers.add(teacher);
-    }
 
-    public Course(String name, List<Teacher> teachers) {
+    public Course(String name) {
         this.name = name;
-        this.teachers = teachers;
-    }
-
-    public Course() {
     }
 
     public int getId() {
@@ -43,13 +31,5 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
     }
 }

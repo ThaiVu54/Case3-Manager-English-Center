@@ -2,6 +2,8 @@ package controller;
 import model.Teacher;
 import service.courseservice.CourseService;
 import service.courseservice.ICourseService;
+import service.teacherconnectsourse.ITeacherConnectSourceService;
+import service.teacherconnectsourse.TeacherConnectSourceService;
 import service.teacherservice.ITeacherService;
 import service.teacherservice.TeacherSevice;
 
@@ -13,8 +15,9 @@ import java.util.List;
 
 @WebServlet(name = "TeacherServlet", value = "/TeacherServlet")
 public class TeacherServlet extends HttpServlet {
-    private ITeacherService teacherService= TeacherSevice.getTeacherSevice();
-    private ICourseService courseService= CourseService.getCourseService();
+    private TeacherSevice teacherService= TeacherSevice.getTeacherSevice();
+    private CourseService courseService= CourseService.getCourseService();
+    private TeacherConnectSourceService teacherConnectSourceService = TeacherConnectSourceService.getTeacherConnectSourceService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,9 +25,9 @@ public class TeacherServlet extends HttpServlet {
         if (action == null){
             action = "";
         }
-//        switch (action){
-//            default: teacherLoginView(request, response); break;
-//        }
+        switch (action){
+            default: teacherLoginView(request, response); break;
+        }
     }
 
     private void teacherLoginView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

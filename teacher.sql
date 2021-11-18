@@ -3,8 +3,7 @@ delimiter $$
 -- hien thi toan bo giao vien
 create procedure selectallteacher()
 begin
-    select t.id, t.name, t.email, t.dob, t.address, t.phone, t.username, t.password, c.id, c.name
-    from teacher t left join course_teacher ct on t.id = ct.teacher_id left join course c on ct.course_id = c.id;
+    select * from teacher;
 end $$
 
 delimiter ;
@@ -20,7 +19,7 @@ begin
         from teacher where id = teacherid;
 end;
 drop procedure selectteacherbyid;
-call selectteacherbyid(2);
+call selectteacherbyid(7);
 
 -- hien thi mon hoc theo idteacher
 delimiter $$
@@ -101,9 +100,10 @@ call insertcourse_teacher(8,1);
 delimiter $$
 create procedure selectallcourse()
 begin
-    select c.id, c.name, t.id, t.name, t.email, t.phone, t.address, t.dob, t.username, t.password
-    from course c left join course_teacher ct on c.id = ct.course_id left join teacher t on ct.teacher_id = t.id group by c.id;
+    select *
+    from course;
 end $$
+
 delimiter ;
 drop procedure selectallcourse;
 call  selectallcourse();
@@ -165,7 +165,7 @@ create procedure selectallcoursebyteacherid(
     teacherid int
 )
 begin
-    select c.id, c.name, t.id, t.name, t.email, t.phone, t.dob, t.address, t.username, t.password
+    select c.id, c.name
         from course c join course_teacher ct on c.id = ct.course_id join teacher t on ct.teacher_id = t.id where t.id = teacherid;
 end $$
 delimiter ;
@@ -178,9 +178,17 @@ create procedure selectallteacherbycourseid(
     courseid int
 )
 begin
-    select t.id, t.name, t.phone, t.dob, t.address, t.email, t.username, t.password, c.id, c.name
+    select t.id, t.name, t.phone, t.dob, t.address, t.email, t.username, t.password
         from teacher t join course_teacher ct on t.id = ct.teacher_id join course c on ct.course_id = c.id where ct.course_id = courseid;
 end $$
 delimiter ;
 drop procedure selectallteacherbycourseid;
 call selectallteacherbycourseid(3);
+
+delimiter $$
+create procedure selectcourse_teacher()
+begin
+    select * from course_teacher;
+end $$
+delimiter ;
+call selectcourse_teacher();
