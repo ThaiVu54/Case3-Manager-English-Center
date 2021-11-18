@@ -17,12 +17,12 @@ public class MinistryService implements IMinistry {
 
     public static final String SELECT_FROM_MINISTRY = "select * from ministry";
     public static final String INSERT_INTO_MINISTRY_NAME_EMAIL_DOB_ADDRESS_PHONE_VALUES = "INSERT INTO ministry (name, email, dob, address, phone) VALUES (?,?,?,?,?)";
+    Connection connection = ConnectSingleton.getConnection();
 
     @Override
     public List<Ministry> showMinistry() {
         List<Ministry> ministries = new ArrayList<>();
-        try (Connection connection = ConnectSingleton.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_MINISTRY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_MINISTRY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -42,8 +42,7 @@ public class MinistryService implements IMinistry {
 
     @Override
     public void addMinistry(Ministry ministry) throws SQLException {
-        try (Connection connection = ConnectSingleton.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_MINISTRY_NAME_EMAIL_DOB_ADDRESS_PHONE_VALUES)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_MINISTRY_NAME_EMAIL_DOB_ADDRESS_PHONE_VALUES)) {
             preparedStatement.setString(1, ministry.getName());
             preparedStatement.setString(2, ministry.getEmail());
             preparedStatement.setString(3, ministry.getDob());
@@ -56,7 +55,6 @@ public class MinistryService implements IMinistry {
     @Override
     public boolean updateMinistry(Ministry ministry) throws SQLException {
         boolean rowUpdated = false;
-        Connection connection = ConnectSingleton.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ministry\n" +
                 "SET name    = ?,\n" +
                 "    email   = ?,\n" +
@@ -77,7 +75,6 @@ public class MinistryService implements IMinistry {
     @Override
     public boolean deleteMinistry(int id) throws SQLException {
         boolean rowDeleted = false;
-        Connection connection = ConnectSingleton.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_MINISTRY_WHERE_ID);
         preparedStatement.setInt(1, id);
         rowDeleted = preparedStatement.executeUpdate() > 1;
@@ -88,8 +85,7 @@ public class MinistryService implements IMinistry {
     public Ministry findById(int id) {
         Ministry ministry = null;
         String query = "call find_id_ministry(?)";
-        try (Connection connection = ConnectSingleton.getConnection();
-             CallableStatement callableStatement = connection.prepareCall(query)) {
+        try ( CallableStatement callableStatement = connection.prepareCall(query)) {
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
@@ -99,7 +95,7 @@ public class MinistryService implements IMinistry {
                 String dob = resultSet.getString("dob");
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
-                ministry = new Ministry(id, name, email, dob, address, phone);
+                ministry = new Ministry(name, email, dob, address, phone);
             }
 
         } catch (SQLException e) {
@@ -112,4 +108,20 @@ public class MinistryService implements IMinistry {
 //        MinistryService ministryService = new MinistryService();
 //        ministryService.findById(1);
 //    }
+
+    private void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
 }

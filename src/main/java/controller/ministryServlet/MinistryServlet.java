@@ -45,7 +45,7 @@ public class MinistryServlet extends HttpServlet {
         int idMinistry = Integer.parseInt(request.getParameter("id"));
         Ministry mnt = ministryService.findById(idMinistry);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("ministry/edit.jsp");
-        request.setAttribute("ministry", ministryService.findById(idMinistry));
+        request.setAttribute("ministry", mnt);
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

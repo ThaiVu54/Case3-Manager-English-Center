@@ -21,7 +21,7 @@
 </style>
 <body>
 <center>
-    <h1><a href="/ministries" style="color: #dc3545; text-decoration: none">Ministry Manager</a></h1>
+    <h1 style="color: #dc3545; text-decoration: none">Ministry Manager</h1>
 </center>
 <div align="center">
     <table border="1" cellpadding="5" class="table table-info table-hover table-striped">

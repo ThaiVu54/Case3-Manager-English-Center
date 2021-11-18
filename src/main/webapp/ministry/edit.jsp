@@ -49,7 +49,9 @@
 </head>
 <body>
 <center>
-    <h1><a href="/ministries" style="border: none; color: #dc3545; text-decoration: none">Edit Ministry</a></h1>
+    <h1><a href="/ministries?action=show" style="border: none; color: #dc3545; text-decoration: none">Edit Ministry</a></h1>
+    <h1><a href="/ministries?action=show">Ministry Manager</a></h1>
+
 </center>
 <div align="center">
     <form  method="post">
@@ -63,7 +65,7 @@
             </tr>
             <tr>
                 <th>Email:</th>
-                <td><input type="text" name="email" size="45" value="${ministry.getEmailll()}"></td>
+                <td><input type="text" name="email" size="45" value="${ministry.getEmail()}"></td>
             </tr>
             <tr>
                 <th>Date of birth:</th>
@@ -71,7 +73,7 @@
             </tr>
             <tr>
                 <th>Address:</th>
-                <td><input type="text" name="address" size="45" value="${ministry.getAdress()}"></td>
+                <td><input type="text" name="address" size="45" value="${ministry.getAddress()}"></td>
             </tr>
             <tr>
                 <th>Phone:</th>
