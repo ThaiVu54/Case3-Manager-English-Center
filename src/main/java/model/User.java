@@ -5,7 +5,7 @@ import java.util.Date;
 public abstract class User {
     private String userName;
     private String password;
-    private Date dob;
+    private String dob;
     private String address;
     private String email;
     private String phone;
@@ -14,9 +14,18 @@ public abstract class User {
     public User() {
     }
 
-    public User(String userName, String password, Date dob, String address, String email, String phone,String name) {
+    public User(String userName, String password, String dob, String address, String email, String phone,String name) {
         this.userName = userName;
         this.password = password;
+        this.dob = dob;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.name = name;
+    }
+
+    public User(String userName, String dob, String address, String email, String phone, String name) {
+        this.userName = userName;
         this.dob = dob;
         this.address = address;
         this.email = email;
@@ -40,11 +49,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

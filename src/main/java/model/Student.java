@@ -10,18 +10,25 @@ public class Student extends User{
     public Student() {
     }
 
-    public Student(String userName, String password, Date dob, String address, String email, String phone, int id, Grade grade, double mark,String name) {
+    public Student(String userName, String password, String dob, String address, String email, String phone, int id, Grade grade, double mark,String name) {
         super(userName, password, dob, address, email, phone, name);
         this.id = id;
         this.grade = grade;
         this.mark = mark;
     }
 
-    public Student(String userName, String password, Date dob, String address, String email, String phone, Grade grade, double mark,String name) {
+    public Student(String userName,String dob, String address, String email, String phone,double mark,String name ) {
+     super(userName, dob, address, email, phone, name);
+     this.mark = mark;
+    }
+
+    public Student(String userName, String password, String dob, String address, String email, String phone, Grade grade, double mark,String name) {
         super(userName, password, dob, address, email, phone, name);
         this.grade = grade;
         this.mark = mark;
     }
+
+
 
     public int getId() {
         return id;

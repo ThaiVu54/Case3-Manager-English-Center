@@ -33,8 +33,7 @@ create procedure updateStudentByID(
     newdob varchar(25),
     newaddress varchar(50),
     newphone varchar(10),
-    newgrade_id int,
-    newpasswpord varchar(30)
+    newgrade_id int
 )
 begin
     update student
@@ -44,13 +43,21 @@ begin
         dob      = newdob,
         address  = newaddress,
         phone    = newphone,
-        grade_id = newgrade_id,
-        password = newpasswpord
+        grade_id = newgrade_id
     where id = studentID;
 end $$
 delimiter ;
 drop procedure updateStudentByID;
-call updateStudentByID(5, 'Tuan', 'tuan@gmail.com', 5.7, '1996-06-07', 'Ha Tinh', '01234679', 2, '456789123');
+call updateStudentByID(5, 'Tuan', 'tuan@gmail.com', 5.7, '1996-06-07', 'Ha Tinh', '01234679', 2);
+
+delimiter $$
+create procedure updatePasswordByUserName(
+    newPassword varchar(30)
+)
+begin
+    update student set password = newPassword;
+end $$
+delimiter ;
 
 
 delimiter $$
@@ -82,4 +89,30 @@ end $$
 delimiter ;
 drop procedure selectAllStudents;
 call selectAllStudents();
+
+
+delimiter $$
+create procedure getStudentInforByID(
+    studentID int
+)
+begin
+    select s.name as StudentName,
+           s.email,
+           s.mark,
+           s.dob as DateOfBirth,
+           s.address,
+           s.phone,
+           s.username,
+           g.name as GradeName,
+           c.name as CourseName
+    from student s
+             join grade g on s.grade_id = g.id
+             join course_teacher on g.course_teacher_id = course_teacher.id
+             join course c on course_teacher.course_id = c.id
+    where s.id = studentID;
+end $$
+delimiter ;
+drop procedure getStudentInforByID;
+call getStudentInforByID(2);
+
 
