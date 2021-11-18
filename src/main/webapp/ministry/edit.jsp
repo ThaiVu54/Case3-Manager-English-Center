@@ -45,43 +45,39 @@
     }
 </style>
 <head>
-    <title>Edit Book</title>
+    <title>Edit Ministry</title>
 </head>
 <body>
 <center>
-    <h1><a href="/books" style="border: none; color: #dc3545; text-decoration: none">BOOK MANAGER</a></h1>
+    <h1><a href="/ministries" style="border: none; color: #dc3545; text-decoration: none">Edit Ministry</a></h1>
 </center>
 <div align="center">
-    <form method="post">
+    <form  method="post">
         <table border="1" cellpadding="5" class="table table-info table-hover table-striped">
             <tr>
-                <td colspan="2" style="text-align: center"><h4>Edit Book</h4></td>
+                <td colspan="2" style="text-align: center"><h4>Edit Ministry</h4></td>
             </tr>
             <tr>
-                <th>Name Book:</th>
-                <td><input type="text" name="nameBook" size="45" value="${book.nameBook}"></td>
+                <th>Name:</th>
+                <td><input type="text" name="name" size="45" value="${ministry.getName()}"></td>
             </tr>
             <tr>
-                <th>Price:</th>
-                <td><input type="text" name="price" size="45" value="${book.price}"></td>
+                <th>Email:</th>
+                <td><input type="text" name="email" size="45" value="${ministry.getEmailll()}"></td>
             </tr>
             <tr>
-                <th>Description:</th>
-                <td><input type="text" name="description" size="45" value="${book.description}"></td>
+                <th>Date of birth:</th>
+                <td><input type="text" name="dob" size="45" value="${ministry.getDob()}"></td>
             </tr>
             <tr>
-                <th>Category:</th>
-                <td>
-                    <select name="category" >
-                        <option selected="selected">${book.getCategory().nameCategory}</option>
-                        <c:forEach items="${category}" var="c">
-                            <c:if test="${c.nameCategory != book.getCategory().nameCategory}">
-                                <option value="${c.id}">${c.nameCategory}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                </td>
+                <th>Address:</th>
+                <td><input type="text" name="address" size="45" value="${ministry.getAdress()}"></td>
             </tr>
+            <tr>
+                <th>Phone:</th>
+                <td><input type="text" name="phone" size="45" value="${ministry.getPhone()}"></td>
+            </tr>
+
             <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save" class="btn btn-outline-info">

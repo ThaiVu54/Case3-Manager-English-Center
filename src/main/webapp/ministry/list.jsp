@@ -11,7 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <html>
 <head>
-    <title>List Book</title>
+    <title>Ministry</title>
 </head>
 <style>
     div {
@@ -47,8 +47,8 @@
                 <td><c:out value="${m.getAddress()}"/></td>
                 <td><c:out value="${m.getPhone()}"/></td>
                 <td>
-                    <a href="/books?action=edit&id=${m.id}">Edit</a>
-                    <a href="/books?action=delete&id=${m.id}">Delete</a>
+                    <a href="/ministries?action=edit&id=${m.getId()}">Edit</a>
+                    <a href="/ministries?action=delete&id=${m.getId()}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -11,9 +11,9 @@ import java.util.List;
 
 
 public class MinistryService implements IMinistry {
-    public static final String UPDATE_MINISTRY_T_SET_T_NAME_T_EMAIL_T_DOB_T_ADDRESS_T_PHONE_WHERE_T_ID = "UPDATE ministry t SET t.name = ?, t.email = ?, t.dob = ?, t.address = ?, t.phone = ? WHERE t.id = ?";
+    public static final String UPDATE_MINISTRY_T_SET_T_NAME_T_EMAIL_T_DOB_T_ADDRESS_T_PHONE_WHERE_T_ID = "UPDATE ministry t SET t.name = ?, t.email = ?, t.dob = ?, t.address = ?, t.phone = ? WHERE t.id = ?;";
     public static final String DELETE_FROM_MINISTRY_WHERE_ID = "DELETE FROM ministry WHERE id = ?";
-    Ministry ministry = new Ministry();
+//    Ministry ministry = new Ministry();
 
     public static final String SELECT_FROM_MINISTRY = "select * from ministry";
     public static final String INSERT_INTO_MINISTRY_NAME_EMAIL_DOB_ADDRESS_PHONE_VALUES = "INSERT INTO ministry (name, email, dob, address, phone) VALUES (?,?,?,?,?)";
@@ -57,7 +57,13 @@ public class MinistryService implements IMinistry {
     public boolean updateMinistry(Ministry ministry) throws SQLException {
         boolean rowUpdated = false;
         Connection connection = ConnectSingleton.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_MINISTRY_T_SET_T_NAME_T_EMAIL_T_DOB_T_ADDRESS_T_PHONE_WHERE_T_ID);
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ministry\n" +
+                "SET name    = ?,\n" +
+                "    email   = ?,\n" +
+                "    dob     = ?,\n" +
+                "    address = ?,\n" +
+                "    phone   = ?\n" +
+                "WHERE id = ?");
         preparedStatement.setString(1, ministry.getName());
         preparedStatement.setString(2, ministry.getEmail());
         preparedStatement.setString(3, ministry.getDob());
@@ -81,7 +87,7 @@ public class MinistryService implements IMinistry {
     @Override
     public Ministry findById(int id) {
         Ministry ministry = null;
-        String query = "{call find_id_ministry(?)}";
+        String query = "call find_id_ministry(?)";
         try (Connection connection = ConnectSingleton.getConnection();
              CallableStatement callableStatement = connection.prepareCall(query)) {
             callableStatement.setInt(1, id);
@@ -101,4 +107,9 @@ public class MinistryService implements IMinistry {
         }
         return ministry;
     }
+
+//    public static void main(String[] args) {
+//        MinistryService ministryService = new MinistryService();
+//        ministryService.findById(1);
+//    }
 }
