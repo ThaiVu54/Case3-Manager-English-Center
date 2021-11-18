@@ -54,7 +54,7 @@
                 </tr>
             </c:forEach>
         </table>
-        <h3><a href="/ministries?action=create" style=" color: darkturquoise; text-decoration: none">Add new Book Ministry</a></h3>
+        <h3><a href="/ministries?action=create" style=" color: darkturquoise; text-decoration: none">Add new Ministry</a></h3>
     </div>
 <%--</div>--%>
 

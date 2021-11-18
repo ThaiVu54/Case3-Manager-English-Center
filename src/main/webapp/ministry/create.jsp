@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <th>Date of birth:</th>
-                <td><input type="text" name="dob" size="45" value="${ministry.getDob()}"></td>
+                <td><input type="date" name="dob" size="45" value="${ministry.getDob()}"></td>
             </tr>
             <tr>
                 <th>Address:</th>
@@ -78,6 +78,14 @@
             <tr>
                 <th>Phone:</th>
                 <td><input type="text" name="phone" size="45" value="${ministry.getPhone()}"></td>
+            </tr>
+            <tr>
+                <th>UserName:</th>
+                <td><input type="text" name="username" size="45" value="${ministry.getUsername()}"></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" name="password" size="45" value="${ministry.getPassword()}"></td>
             </tr>
 
             <tr>

@@ -79,7 +79,14 @@
                 <th>Phone:</th>
                 <td><input type="text" name="phone" size="45" value="${ministry.getPhone()}"></td>
             </tr>
-
+            <tr>
+                <th>UserName</th>
+                <td><input type="text" name="username" size="45" value="${ministry.getUsername()}"></td>
+            </tr>
+            <tr>
+                <th>PassWord:</th>
+                <td><input type="password" name="password" size="45" value="${ministry.getPassword()}"></td>
+            </tr>
             <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save" class="btn btn-outline-info">

@@ -1,8 +1,6 @@
 package controller.ministryServlet;
 
 import model.Ministry;
-import service.accountMinistryService.AccountMinistry;
-import service.accountMinistryService.IAccountMinistry;
 import service.ministryService.IMinistry;
 import service.ministryService.MinistryService;
 
@@ -47,7 +45,7 @@ public class MinistryServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
             ministryService.deleteMinistry(id);
-            response.sendRedirect("ministries");
+            response.sendRedirect("/ministries?action=show");
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +54,7 @@ public class MinistryServlet extends HttpServlet {
     private void editForm(HttpServletRequest request, HttpServletResponse response) {
         int id_ministry = Integer.parseInt(request.getParameter("id"));
         Ministry ministry = ministryService.findById(id_ministry);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit.jsp");
         request.setAttribute("ministry",ministry);
         try {
             dispatcher.forward(request,response);
@@ -136,11 +134,12 @@ public class MinistryServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         try {
-            ministryService.updateMinistry(new Ministry(name,email,dob,address,phone));
+            ministryService.updateMinistry(new Ministry(id,name,email,dob,address,phone,username,password));
             RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/edit.jsp");
+            request.setAttribute("message", "Edit successful");
             dispatcher.forward(request,response);
         } catch (SQLException | ServletException | IOException e) {
             e.printStackTrace();
@@ -156,11 +155,13 @@ public class MinistryServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        Ministry ministry = new Ministry(name,email,dob,address,phone,username,password);
         try {
-            ministryService.addMinistry(new Ministry(name,email,dob,address,phone,username,password));
+            ministryService.addMinistry(ministry);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/create");
-            dispatcher.forward(request,response);
+            request.setAttribute("ministry",ministry);
             request.setAttribute("message","add new ministry");
+            dispatcher.forward(request,response);
         } catch (SQLException | ServletException | IOException e) {
             e.printStackTrace();
         }
