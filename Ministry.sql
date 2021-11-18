@@ -50,4 +50,11 @@ DELIMITER ;
 drop procedure create_ministry;
 call create_ministry('thai','thai@gmail.com','1999-1-1','nam dinh','0909880834');
 
+drop table ministryaccount;
+create table ministryaccount(
+    username varchar(50) primary key ,
+    password varchar(50) not null ,
+    ministry_id int,
+    foreign key (ministry_id) references ministry(id)
+);
 

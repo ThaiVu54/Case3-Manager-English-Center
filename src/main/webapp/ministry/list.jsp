@@ -15,8 +15,7 @@
 </head>
 <style>
     div {
-        margin-left: 400px;
-        width: 700px;
+
     }
 </style>
 <body>
@@ -25,7 +24,7 @@
 </center>
 <%--<div style="margin-right: 300px">--%>
     <div align="center">
-        <table border="1" cellpadding="5" class="table table-info table-hover table-striped" style="text-align: center">
+        <table border="1" cellpadding="5" class="table table-info table-hover table-striped text-center" style="text-align: center">
             <tr>
                 <td colspan="7" style="text-align: center"><h4>Ministry</h4></td>
             </tr>
