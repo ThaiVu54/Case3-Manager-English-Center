@@ -1,6 +1,6 @@
-use english_center;
+use demo3;
 
-# Student
+#Student
 
 delimiter $$
 create procedure addNewStudent(
@@ -23,7 +23,8 @@ drop procedure addNewStudent;
 call addNewStudent('anh', 'anh@gmail.com', 7.5, '1988-05-05', 'Ha Noi', '0973745598', 2, 'anhpro', '123456789');
 
 
-delimiter $$
+delimiter
+$$
 create procedure updateStudentByID(
     studentID int,
     newstudentName varchar(50),
@@ -49,29 +50,35 @@ delimiter ;
 drop procedure updateStudentByID;
 call updateStudentByID(5, 'Tuan', 'tuan@gmail.com', 5.7, '1996-06-07', 'Ha Tinh', '01234679', 2);
 
-delimiter $$
+delimiter
+$$
 create procedure updatePasswordByUserName(
     newPassword varchar(30)
 )
 begin
-    update student set password = newPassword;
+    update student
+    set password = newPassword;
 end $$
 delimiter ;
 
 
-delimiter $$
+delimiter
+$$
 create procedure deleteStudentByID(
     studentID int
 )
 begin
-    delete from student where id = studentID;
+    delete
+    from student
+    where id = studentID;
 end $$
 delimiter ;
 drop procedure deleteStudentByID;
 call deleteStudentByID(5);
 
 
-delimiter $$
+delimiter
+$$
 create procedure selectAllStudents()
 begin
     select s.id,
@@ -93,18 +100,22 @@ drop procedure selectAllStudents;
 call selectAllStudents();
 
 
-delimiter $$
+delimiter
+$$
 create procedure getStudentInforByID(
     studentID int
 )
 begin
-    select * from student where id = studentID;
+    select *
+    from student
+    where id = studentID;
 end $$
 delimiter ;
 drop procedure getStudentInforByID;
 call getStudentInforByID(2);
 
-delimiter $$
+delimiter
+$$
 create procedure selectstudentbygradeid(
     gradeid int
 )
@@ -120,7 +131,8 @@ drop procedure selectstudentbygradeid;
 call selectstudentbygradeid(2);
 
 -- Lấy ra khóa học từ id grade
-delimiter $$
+delimiter
+$$
 create procedure selectcourbyId(
     gradeid int
 )
@@ -133,7 +145,8 @@ end $$
 delimiter ;
 call selectcourbyId(3);
 
-delimiter $$
+delimiter
+$$
 create procedure selectteacherbygradeid(
     gradeid int
 )

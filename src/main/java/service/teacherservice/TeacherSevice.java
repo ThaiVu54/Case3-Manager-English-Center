@@ -8,10 +8,41 @@ import java.util.List;
 
 public class TeacherSevice implements ITeacherService{
     private List<Teacher> teachers;
-    private static TeacherSevice teacherSevice;
-    public static TeacherSevice getTeacherSevice(){
-        if (teacherSevice == null){
-            teacherSevice = new TeacherSevice();
+    private CourseService courseService = new CourseService();
+
+private TeacherSevice(){}
+
+    private static TeacherSevice teacherSevice = new TeacherSevice();
+
+public static TeacherSevice getInstance() {
+    if (teacherSevice == null) {
+        teacherSevice = new TeacherSevice();
+    }
+    return teacherSevice;
+}
+
+    @Override
+    public List<Teacher> selectAllTeacherbyCourseid(int id) {
+        teachers = new ArrayList<>();
+        String query = "call selectallteacherbycourseid(?);";
+        try(Connection connection = ConnectSingleton.getConnection(); CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(1, id);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()){
+                int teacherid = rs.getInt(1);
+                String name = rs.getString(2);
+                String phone = rs.getString(3);
+                String dob = rs.getString(4);
+                String address = rs.getString(5);
+                String email = rs.getString(6);
+                String username = rs.getString(7);
+                String password = rs.getString(8);
+                List<Course> courses = courseService.selectAllCoursebyTecherId(teacherid);
+                teachers.add(new Teacher(username, password, dob, address, email, phone, teacherid, courses, name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
         }
         return teacherSevice;
     }

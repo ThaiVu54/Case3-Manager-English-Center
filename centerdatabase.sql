@@ -131,14 +131,13 @@ create table diary(
 -- test username password student
 select s.name, s2.username, s2.password
 from student s join studentaccount s2 on s.id = s2.student_id where s.id = 1;
-<<<<<<< HEAD
 
 drop table teacheraccount;
 
-=======
 alter table teacher add username varchar(20);
 alter table teacher add password varchar(20);
 alter table student add username varchar(20);
 alter table student add password varchar(20);
->>>>>>> fd761bb2c7413ade8c8b4c06169d4faba8d2dfad
+alter table ministry add username varchar(20);
+alter table ministry add password varchar(20);
 
