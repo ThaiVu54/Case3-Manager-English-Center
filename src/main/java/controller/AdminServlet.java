@@ -35,15 +35,8 @@ public class AdminServlet extends HttpServlet {
 
     private void showEditAdminForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Admin> admin=adminManager.selectAdmin();
-        String name=request.getParameter("name");
-        String email=request.getParameter("email");
-        String dob=request.getParameter("dob");
-        String address=request.getParameter("address");
-        String phone=request.getParameter("phone");
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
+        request.setAttribute("Admin",admin );
         RequestDispatcher dispatcher=request.getRequestDispatcher("Admin/edit.jsp");
-        request.setAttribute("Admin",admin);
         dispatcher.forward(request,response);
     }
 
@@ -82,7 +75,7 @@ public class AdminServlet extends HttpServlet {
         String password=request.getParameter("password");
         Admin admin=new Admin(name,email,dob,address,phone,username,password);
         adminManager.editAdmin(admin);
-        RequestDispatcher dispatcher=request.getRequestDispatcher("Admin/edit.jsp");
-        dispatcher.forward(request,response);
+        response.sendRedirect("/admin");
+
     }
 }
