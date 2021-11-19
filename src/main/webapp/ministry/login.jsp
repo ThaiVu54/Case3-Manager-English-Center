@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post"
+                <form method="post" action="/ministries?action=show">
                 ">
                 <div class="input-group form-group">
                     <div class="input-group-prepend">

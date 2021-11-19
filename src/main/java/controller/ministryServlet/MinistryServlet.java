@@ -124,7 +124,8 @@ public class MinistryServlet extends HttpServlet {
                 checked = true;
                 break;
             }
-            if (checked){
+        }
+            if (checked==true){
                 request.setAttribute("message", "Login successful");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/list.jsp");
                 dispatcher.forward(request,response);
@@ -132,7 +133,6 @@ public class MinistryServlet extends HttpServlet {
                 request.setAttribute("message","Login fail");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/login.jsp");
             }
-        }
     }
 
     private void editMinistry(HttpServletRequest request, HttpServletResponse response) {
