@@ -12,6 +12,6 @@
     <title>$Title$</title>
   </head>
   <body>
-$END$
+<c:redirect url="/ministries"/>
   </body>
 </html>
