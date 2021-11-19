@@ -161,8 +161,10 @@ public class MinistryServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/create");
             request.setAttribute("ministry",ministry);
             request.setAttribute("message","add new ministry");
-            dispatcher.forward(request,response);
-        } catch (SQLException | ServletException | IOException e) {
+            response.sendRedirect("/ministries?action=show");
+
+//            dispatcher.forward(request,response);
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
