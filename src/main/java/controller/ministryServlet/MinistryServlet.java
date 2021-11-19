@@ -27,7 +27,11 @@ public class MinistryServlet extends HttpServlet {
                 createForm(request, response);
                 break;
             case "show":
-                showAllMinistry(request, response);
+                try {
+                    showAllMinistry(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "edit":
                 editForm(request, response);
@@ -63,8 +67,8 @@ public class MinistryServlet extends HttpServlet {
         }
     }
 
-    private void showAllMinistry(HttpServletRequest request, HttpServletResponse response) {
-        List<Ministry> ministryList = ministryService.showMinistry();
+    private void showAllMinistry(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        List<Ministry> ministryList = ministryService.showUserPass();
         RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/list.jsp");
         request.setAttribute("ministry", ministryList);
         try {
@@ -99,16 +103,20 @@ public class MinistryServlet extends HttpServlet {
                 editMinistry(request,response);
                 break;
             default:
-                ministryLogin(request,response);
+                try {
+                    ministryLogin(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
-    private void ministryLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void ministryLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Ministry ministry=null;
         boolean checked = false;
-        List<Ministry> ministryList = ministryService.showMinistry();
+        List<Ministry> ministryList = ministryService.showUserPass();
         for (Ministry ministry1: ministryList
              ) {
             if (ministry1.getUsername().equals(username) && ministry1.getPassword().equals(password) ){
@@ -118,7 +126,7 @@ public class MinistryServlet extends HttpServlet {
             }
             if (checked){
                 request.setAttribute("message", "Login successful");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/homepage.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/list.jsp");
                 dispatcher.forward(request,response);
             }else {
                 request.setAttribute("message","Login fail");

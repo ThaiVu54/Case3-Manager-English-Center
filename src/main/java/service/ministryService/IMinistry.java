@@ -15,4 +15,6 @@ public interface IMinistry {
      boolean deleteMinistry(int id) throws SQLException;
 
      Ministry findById (int id);
+
+     List<Ministry> showUserPass() throws SQLException;
 }

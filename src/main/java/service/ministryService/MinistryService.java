@@ -17,6 +17,17 @@ public class MinistryService implements IMinistry {
     public static final String INSERT_INTO_MINISTRY_NAME_EMAIL_DOB_ADDRESS_PHONE_USERNAME_PASSWORD_VALUES = "INSERT INTO ministry (name, email, dob, address, phone, username, password) VALUES (?, ?, ?, ?, ?,?, ?)";
     Connection connection = ConnectSingleton.getConnection();
 
+    public List<Ministry> showUserPass() throws SQLException {
+        List<Ministry> ministryListUP = new ArrayList<>();
+        PreparedStatement preparedStatement = connection.prepareStatement("select username,password from ministry");
+        ResultSet resultSet=preparedStatement.executeQuery();
+        while (resultSet.next()){
+            String user = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            ministryListUP.add(new Ministry(user,password));
+        }
+        return ministryListUP;
+    }
 
     @Override
     public List<Ministry> showMinistry() {

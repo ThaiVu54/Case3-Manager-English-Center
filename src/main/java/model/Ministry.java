@@ -24,6 +24,11 @@ public class Ministry {
         this.password = password;
     }
 
+    public Ministry(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Ministry(String name, String email, String dob, String address, String phone, String username, String password) {
         this.name = name;
         this.email = email;
