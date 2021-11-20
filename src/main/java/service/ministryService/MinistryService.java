@@ -30,7 +30,7 @@ public class MinistryService implements IMinistry {
     }
 
     @Override
-    public List<Ministry> showMinistry() {
+    public List<Ministry> showAllMinistry(){
         List<Ministry> ministryList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement("select id,name,email,dob,address,phone from ministry")) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -101,6 +101,11 @@ public class MinistryService implements IMinistry {
         return rowUpdated;
     }
 
+
+    @Override
+    public List<Ministry> showMinistry() {
+        return null;
+    }
 
     @Override
     public void addMinistry(Ministry ministry) throws SQLException {

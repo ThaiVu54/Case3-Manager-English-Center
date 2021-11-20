@@ -17,4 +17,6 @@ public interface IMinistry {
      Ministry findById (int id);
 
      List<Ministry> showUserPass() throws SQLException;
+
+     List<Ministry> showAllMinistry() throws SQLException;
 }

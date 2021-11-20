@@ -68,7 +68,7 @@ public class MinistryServlet extends HttpServlet {
     }
 
     private void showAllMinistry(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-        List<Ministry> ministryList = ministryService.showUserPass();
+        List<Ministry> ministryList = ministryService.showAllMinistry();
         RequestDispatcher dispatcher = request.getRequestDispatcher("ministry/list.jsp");
         request.setAttribute("ministry", ministryList);
         try {
